@@ -1,9 +1,9 @@
 //
 //  AppDelegate.swift
-//  CircularScrollingDemo
+//  TwoDirectionScrollDemo
 //
-//  Created by JiangNan on 2018/8/2.
-//  Copyright © 2018年 nickjiang. All rights reserved.
+//  Created by JiangNan on 2018/8/12.
+//  Copyright © 2018 nickjiang. All rights reserved.
 //
 
 import UIKit
