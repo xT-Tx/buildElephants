@@ -18,7 +18,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZFm-UH-483" customClass="TwoDirectionCollectionView" customModule="TwoDirectionScrollDemo" customModuleProvider="target">
+                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="ZFm-UH-483" customClass="TwoDirectionCollectionView" customModule="TwoDirectionScrollDemo" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="70" width="375" height="597"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="D0F-li-acQ">
@@ -36,6 +36,33 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </view>
                                     </collectionViewCell>
+                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="TextCell" id="xF5-WT-Xot" customClass="TextCell" customModule="TwoDirectionScrollDemo" customModuleProvider="target">
+                                        <rect key="frame" x="60" y="0.0" width="119" height="50"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO">
+                                            <rect key="frame" x="0.0" y="0.0" width="119" height="50"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="vda-IL-LyD">
+                                                    <rect key="frame" x="0.0" y="9" width="119" height="32"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                        </view>
+                                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                                        <constraints>
+                                            <constraint firstAttribute="trailing" secondItem="vda-IL-LyD" secondAttribute="trailing" id="KcO-x4-sdG"/>
+                                            <constraint firstAttribute="bottom" secondItem="vda-IL-LyD" secondAttribute="bottom" constant="9" id="RKt-uS-JDo"/>
+                                            <constraint firstItem="vda-IL-LyD" firstAttribute="leading" secondItem="xF5-WT-Xot" secondAttribute="leading" id="X0J-xt-mWD"/>
+                                            <constraint firstItem="vda-IL-LyD" firstAttribute="top" secondItem="xF5-WT-Xot" secondAttribute="top" constant="9" id="yJf-gH-eEf"/>
+                                        </constraints>
+                                        <size key="customSize" width="119" height="50"/>
+                                        <connections>
+                                            <outlet property="title" destination="vda-IL-LyD" id="fke-Jd-cxW"/>
+                                        </connections>
+                                    </collectionViewCell>
                                 </cells>
                             </collectionView>
                         </subviews>
@@ -48,6 +75,9 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="ZFm-UH-483" id="hYm-6K-JiC"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>

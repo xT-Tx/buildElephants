@@ -9,17 +9,18 @@
 import UIKit
 
 class TwoDirectionCollectionView: UICollectionView {
-
-    required init() {
-        super.init(frame: CGRect.zero, collectionViewLayout: TwoDirectionCollectionViewLayout())
-        
-        let dataSourceDelegate = CollectionViewDelegate()
-        self.dataSource = dataSourceDelegate
-        self.delegate = dataSourceDelegate
-    }
     
     required init?(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
+
+        collectionViewLayout = TwoDirectionCollectionViewLayout()
     }
     
+    func collectionViewContentChanged() {
+        if let layout = collectionViewLayout as? TwoDirectionCollectionViewLayout {
+            layout.collectionViewContentChanged()
+        }
+    }
+    
+    weak var layoutDelegate: UICollectionViewDelegateFlowLayout?
 }

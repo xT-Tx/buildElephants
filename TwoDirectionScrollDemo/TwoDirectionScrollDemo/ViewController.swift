@@ -9,10 +9,18 @@
 import UIKit
 
 class ViewController: UIViewController {
-
+    @IBOutlet var collectionView: TwoDirectionCollectionView!
+    
+    let cvDelegate = CollectionViewDelegate()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view, typically from a nib.
+        
+        collectionView.delegate = cvDelegate
+        collectionView.dataSource = cvDelegate
+        collectionView.layoutDelegate = cvDelegate
+        
+        collectionView.collectionViewContentChanged()
     }
 }
 
