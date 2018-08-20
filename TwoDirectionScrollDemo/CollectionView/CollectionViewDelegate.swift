@@ -12,7 +12,16 @@ class TextCell: UICollectionViewCell {
     
 }
 
+enum ScrollDirection {
+    case none
+    case vertical
+    case horizontal
+}
+
 class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollectionViewDelegate, UICollectionViewDelegateFlowLayout {
+    private var previousContentOffset: CGPoint = CGPoint.zero
+    private var direction: ScrollDirection = .none
+    
     func numberOfSections(in collectionView: UICollectionView) -> Int {
         return 20
     }
@@ -65,4 +74,42 @@ class CollectionViewDelegate: NSObject, UICollectionViewDataSource, UICollection
         }
     }
 
+    //MARK: - UIScrollViewDelegate
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        previousContentOffset = scrollView.contentOffset
+        
+        direction = .none
+    }
+    
+    func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        if direction == .none {
+            let deltaX = fabs(previousContentOffset.x - scrollView.contentOffset.x)
+            let deltaY = fabs(previousContentOffset.y - scrollView.contentOffset.y)
+            if deltaX > deltaY {
+                direction = .horizontal
+            }
+            else {
+                direction = .vertical
+            }
+        }
+        
+        if direction == .horizontal {
+            var offset = scrollView.contentOffset
+            offset.y = previousContentOffset.y
+            scrollView.contentOffset = offset
+        }
+        else if direction == .vertical {
+            var offset = scrollView.contentOffset
+            offset.x = previousContentOffset.x
+            scrollView.contentOffset = offset
+        }
+    }
+    
+    func scrollViewDidEndDragging(_ scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        direction = .none
+    }
+    
+    func scrollViewDidEndDecelerating(_ scrollView: UIScrollView) {
+        direction = .none
+    }
 }
