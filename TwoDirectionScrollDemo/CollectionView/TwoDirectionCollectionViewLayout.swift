@@ -76,10 +76,10 @@ class TwoDirectionCollectionViewLayout: UICollectionViewFlowLayout {
             for row in (0..<numberOfRows) {
                 itemsAttributes.append([UICollectionViewLayoutAttributes]())
                 
-                let headerIndexPath = IndexPath(item: 0, section: row)
-                let headerAttributes = UICollectionViewLayoutAttributes.init(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: headerIndexPath)
                 if let headerHeight = delegateFlowLayout.collectionView?(cv, layout: self, referenceSizeForHeaderInSection: row).height,
                     headerHeight > 0 {
+                    let headerIndexPath = IndexPath(item: 0, section: row)
+                    let headerAttributes = UICollectionViewLayoutAttributes.init(forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, with: headerIndexPath)
                     headerAttributes.frame = CGRect(x: 0, y: yOffset, width: cv.bounds.size.width, height: headerHeight)
                     headerAttributes.zIndex = AxisZPriority.low
                     headerAttributes.isHidden = false
@@ -90,7 +90,6 @@ class TwoDirectionCollectionViewLayout: UICollectionViewFlowLayout {
                 else {
                     headersAttributes.append(nil)
                 }
-                footersAttributes.append(nil)
                 
                 for column in 0..<numberOfColumns {
                     let indexPath = IndexPath(item: column, section: row)
@@ -130,6 +129,21 @@ class TwoDirectionCollectionViewLayout: UICollectionViewFlowLayout {
                         }
                         cvContentSize.height = yOffset
                     }
+                }
+                
+                if let footerHeight = delegateFlowLayout.collectionView?(cv, layout: self, referenceSizeForFooterInSection: row).height,
+                    footerHeight > 0 {
+                    let footerAttributes = UICollectionViewLayoutAttributes.init(forSupplementaryViewOfKind: UICollectionElementKindSectionFooter, with: IndexPath(item: 0, section: row))
+                    footerAttributes.frame = CGRect(x: 0, y: yOffset, width: cv.bounds.size.width, height: footerHeight)
+                    footerAttributes.zIndex = AxisZPriority.low
+                    footerAttributes.isHidden = false
+                    
+                    footersAttributes.append(footerAttributes)
+                    yOffset += footerHeight
+                    cvContentSize.height = yOffset
+                }
+                else {
+                    footersAttributes.append(nil)
                 }
             }
             needsPrepareLayout = false
